@@ -1,15 +1,36 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
-export function StatCard({ title, value, description }: { title: string; value: string; description?: string }) {
+interface StatCardProps {
+  title: string;
+  value: string;
+  description?: string;
+  className?: string;
+}
+
+export function StatCard({
+  title,
+  value,
+  description,
+  className,
+}: StatCardProps) {
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        {description && <p className="text-xs text-muted-foreground mt-1">{description}</p>}
-      </CardContent>
-    </Card>
+    <div
+      className={cn(
+        'border border-white/[0.06] bg-black p-5',
+        'transition-colors duration-200',
+        'hover:border-white/[0.12]',
+        className,
+      )}
+    >
+      <div className="text-[8px] text-white/20 tracking-[0.2em] uppercase mb-3">
+        {title}
+      </div>
+      <div className="text-2xl font-bold tracking-wider text-white/90">
+        {value}
+      </div>
+      {description && (
+        <p className="text-[9px] text-white/20 tracking-wider mt-1.5">{description}</p>
+      )}
+    </div>
   );
 }

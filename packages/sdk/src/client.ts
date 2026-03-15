@@ -43,7 +43,9 @@ export class AtlasClient {
 
     const hash = await this.registry.write.createWorkflow([steps, workflow.rewardPerStep], {
       value: totalDeposit,
-    });
+      account: this.config.walletClient.account!,
+      chain: this.config.chain,
+    } as any);
 
     // Get workflowId from the event logs
     const receipt = await this.config.publicClient.waitForTransactionReceipt({ hash });
@@ -53,15 +55,24 @@ export class AtlasClient {
   }
 
   async pauseWorkflow(workflowId: bigint): Promise<`0x${string}`> {
-    return this.registry.write.pauseWorkflow([workflowId]);
+    return this.registry.write.pauseWorkflow([workflowId], {
+      account: this.config.walletClient.account!,
+      chain: this.config.chain,
+    } as any);
   }
 
   async resumeWorkflow(workflowId: bigint): Promise<`0x${string}`> {
-    return this.registry.write.resumeWorkflow([workflowId]);
+    return this.registry.write.resumeWorkflow([workflowId], {
+      account: this.config.walletClient.account!,
+      chain: this.config.chain,
+    } as any);
   }
 
   async cancelWorkflow(workflowId: bigint): Promise<`0x${string}`> {
-    return this.registry.write.cancelWorkflow([workflowId]);
+    return this.registry.write.cancelWorkflow([workflowId], {
+      account: this.config.walletClient.account!,
+      chain: this.config.chain,
+    } as any);
   }
 
   async getWorkflow(workflowId: bigint): Promise<WorkflowInfo> {

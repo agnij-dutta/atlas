@@ -23,6 +23,8 @@ export class Submitter {
       const nonce = await this.nonceManager.getNextNonce();
 
       const hash = await this.walletClient.sendTransaction({
+        account: this.walletClient.account!,
+        chain: this.walletClient.chain!,
         to: this.engineAddress,
         data: this.encodeExecuteStep(workflowId),
         maxFeePerGas: gasEstimate.maxFeePerGas,

@@ -1,4 +1,4 @@
-import { BigInt } from '@graphprotocol/graph-ts';
+import { BigInt, Address, Bytes } from '@graphprotocol/graph-ts';
 import { StepExecuted, StepFailed } from '../generated/ExecutionEngine/ExecutionEngine';
 import { StepExecution, Workflow, Executor, ProtocolStat } from '../generated/schema';
 
@@ -6,7 +6,7 @@ function getOrCreateExecutor(address: string): Executor {
   let executor = Executor.load(address);
   if (!executor) {
     executor = new Executor(address);
-    executor.address = changetype<import("@graphprotocol/graph-ts").Bytes>(import("@graphprotocol/graph-ts").Address.fromString(address));
+    executor.address = Address.fromString(address);
     executor.totalExecutions = BigInt.fromI32(0);
     executor.successfulExecutions = BigInt.fromI32(0);
     executor.failedExecutions = BigInt.fromI32(0);

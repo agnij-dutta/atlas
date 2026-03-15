@@ -1,0 +1,45 @@
+type Workflow @entity {
+  id: ID!
+  owner: Bytes!
+  status: String!
+  totalSteps: BigInt!
+  currentStepIndex: BigInt!
+  rewardPerStep: BigInt!
+  createdAt: BigInt!
+  createdAtBlock: BigInt!
+  updatedAt: BigInt!
+  executions: [StepExecution!]! @derivedFrom(field: "workflow")
+}
+
+type StepExecution @entity {
+  id: ID!
+  workflow: Workflow!
+  stepIndex: BigInt!
+  executor: Executor!
+  success: Boolean!
+  gasUsed: BigInt!
+  reward: BigInt!
+  timestamp: BigInt!
+  blockNumber: BigInt!
+  txHash: Bytes!
+}
+
+type Executor @entity {
+  id: ID!
+  address: Bytes!
+  totalExecutions: BigInt!
+  successfulExecutions: BigInt!
+  failedExecutions: BigInt!
+  totalRewardsEarned: BigInt!
+  executions: [StepExecution!]! @derivedFrom(field: "executor")
+}
+
+type ProtocolStat @entity {
+  id: ID!
+  totalWorkflows: BigInt!
+  activeWorkflows: BigInt!
+  completedWorkflows: BigInt!
+  failedWorkflows: BigInt!
+  totalExecutions: BigInt!
+  totalRewardsPaid: BigInt!
+}

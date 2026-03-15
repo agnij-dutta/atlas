@@ -1,0 +1,51 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "workflowId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "stepIndex",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "executor",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "gasUsed",
+        "type": "uint256"
+      }
+    ],
+    "name": "StepExecuted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "workflowId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "stepIndex",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "reason",
+        "type": "bytes"
+      }
+    ],
+    "name": "StepFailed",
+    "type": "event"
+  }
+]

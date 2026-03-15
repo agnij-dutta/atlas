@@ -1,0 +1,80 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: WorkflowRegistry
+    network: base-sepolia
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: WorkflowRegistry
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Workflow
+      abis:
+        - name: WorkflowRegistry
+          file: ./abis/WorkflowRegistry.json
+      eventHandlers:
+        - event: WorkflowCreated(indexed uint256,indexed address,uint256,uint256)
+          handler: handleWorkflowCreated
+        - event: WorkflowPaused(indexed uint256)
+          handler: handleWorkflowPaused
+        - event: WorkflowResumed(indexed uint256)
+          handler: handleWorkflowResumed
+        - event: WorkflowCancelled(indexed uint256,uint256)
+          handler: handleWorkflowCancelled
+        - event: WorkflowCompleted(indexed uint256)
+          handler: handleWorkflowCompleted
+        - event: WorkflowFailed(indexed uint256,uint256)
+          handler: handleWorkflowFailed
+      file: ./src/workflow-registry.ts
+  - kind: ethereum
+    name: ExecutionEngine
+    network: base-sepolia
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: ExecutionEngine
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - StepExecution
+        - Executor
+      abis:
+        - name: ExecutionEngine
+          file: ./abis/ExecutionEngine.json
+      eventHandlers:
+        - event: StepExecuted(indexed uint256,indexed uint256,indexed address,uint256)
+          handler: handleStepExecuted
+        - event: StepFailed(indexed uint256,indexed uint256,bytes)
+          handler: handleStepFailed
+      file: ./src/execution-engine.ts
+  - kind: ethereum
+    name: RewardManager
+    network: base-sepolia
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: RewardManager
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - StepExecution
+        - Executor
+      abis:
+        - name: RewardManager
+          file: ./abis/RewardManager.json
+      eventHandlers:
+        - event: RewardClaimed(indexed uint256,indexed uint256,indexed address,uint256)
+          handler: handleRewardClaimed
+      file: ./src/reward-manager.ts

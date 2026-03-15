@@ -1,0 +1,8 @@
+[
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"workflowId","type":"uint256"},{"indexed":true,"name":"owner","type":"address"},{"indexed":false,"name":"totalSteps","type":"uint256"},{"indexed":false,"name":"rewardPerStep","type":"uint256"}],"name":"WorkflowCreated","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"workflowId","type":"uint256"}],"name":"WorkflowPaused","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"workflowId","type":"uint256"}],"name":"WorkflowResumed","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"workflowId","type":"uint256"},{"indexed":false,"name":"refundAmount","type":"uint256"}],"name":"WorkflowCancelled","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"workflowId","type":"uint256"}],"name":"WorkflowCompleted","type":"event"},
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"workflowId","type":"uint256"},{"indexed":false,"name":"stepIndex","type":"uint256"}],"name":"WorkflowFailed","type":"event"}
+]

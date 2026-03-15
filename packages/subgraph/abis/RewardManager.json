@@ -1,0 +1,3 @@
+[
+  {"anonymous":false,"inputs":[{"indexed":true,"name":"workflowId","type":"uint256"},{"indexed":true,"name":"stepIndex","type":"uint256"},{"indexed":true,"name":"executor","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"RewardClaimed","type":"event"}
+]

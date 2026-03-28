@@ -43,9 +43,8 @@ contract ExecutionEngine is IExecutionEngine, AtlasAccessControl {
             // Advance workflow state
             registry.advanceWorkflow(workflowId);
 
-            // Pay executor reward
-            rewardManager.payReward(workflowId, wf.currentStepIndex, msg.sender, wf.rewardPerStep);
-            registry.deductReward(workflowId, wf.rewardPerStep);
+            // Pay executor reward directly from registry (which holds the ETH)
+            registry.payExecutor(workflowId, wf.rewardPerStep, msg.sender);
 
             emit StepExecuted(workflowId, wf.currentStepIndex, msg.sender, result.gasUsed);
         } else {

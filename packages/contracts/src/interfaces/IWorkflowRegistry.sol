@@ -10,8 +10,11 @@ interface IWorkflowRegistry {
     event WorkflowCancelled(uint256 indexed workflowId, uint256 refundAmount);
     event WorkflowCompleted(uint256 indexed workflowId);
     event WorkflowFailed(uint256 indexed workflowId, uint256 stepIndex);
+    event WorkflowOwnerChanged(uint256 indexed workflowId, address indexed newOwner);
 
     function createWorkflow(DataTypes.Step[] calldata steps, uint256 rewardPerStep) external payable returns (uint256);
+    function createWorkflowFor(address workflowOwner, DataTypes.Step[] calldata steps, uint256 rewardPerStep) external payable returns (uint256);
+    function setWorkflowOwner(uint256 workflowId, address newOwner) external;
     function pauseWorkflow(uint256 workflowId) external;
     function resumeWorkflow(uint256 workflowId) external;
     function cancelWorkflow(uint256 workflowId) external;

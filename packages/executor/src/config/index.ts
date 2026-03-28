@@ -23,14 +23,25 @@ export interface ExecutorConfig {
 }
 
 export function loadConfig(): ExecutorConfig {
+  const privateKey = process.env.PRIVATE_KEY;
+  if (!privateKey || privateKey === '0x' || privateKey.length < 66) {
+    throw new Error('PRIVATE_KEY env var is missing or invalid. Must be a 0x-prefixed 64-char hex string.');
+  }
+  const registry = process.env.REGISTRY_ADDRESS;
+  const engine = process.env.ENGINE_ADDRESS;
+  const reward = process.env.REWARD_ADDRESS;
+  if (!registry || !engine || !reward || registry.length < 42) {
+    throw new Error('Contract addresses (REGISTRY_ADDRESS, ENGINE_ADDRESS, REWARD_ADDRESS) must be set.');
+  }
+
   return {
     chain: baseSepolia,
     rpcUrl: process.env.RPC_URL || 'https://sepolia.base.org',
-    privateKey: (process.env.PRIVATE_KEY || '0x') as `0x${string}`,
+    privateKey: privateKey as `0x${string}`,
     contracts: {
-      workflowRegistry: (process.env.REGISTRY_ADDRESS || '0x') as Address,
-      executionEngine: (process.env.ENGINE_ADDRESS || '0x') as Address,
-      rewardManager: (process.env.REWARD_ADDRESS || '0x') as Address,
+      workflowRegistry: registry as Address,
+      executionEngine: engine as Address,
+      rewardManager: reward as Address,
     },
     polling: {
       blockIntervalMs: Number(process.env.BLOCK_INTERVAL_MS || 2000),

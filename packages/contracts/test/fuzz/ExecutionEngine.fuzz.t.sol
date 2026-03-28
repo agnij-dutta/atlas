@@ -51,7 +51,6 @@ contract ExecutionEngineFuzzTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: totalReward}(steps, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: totalReward}(wfId);
 
         // Execute step 0 to set lastExecutedAt
         vm.prank(executor);

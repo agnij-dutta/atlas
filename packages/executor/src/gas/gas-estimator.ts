@@ -18,7 +18,16 @@ export class GasEstimator {
     const block = await this.client.getBlock({ blockTag: 'latest' });
     const baseFee = block.baseFeePerGas || 0n;
     const maxPriorityFeePerGas = 1500000000n; // 1.5 gwei
-    const maxFeePerGas = baseFee * 2n + maxPriorityFeePerGas;
+    let maxFeePerGas = baseFee * 2n + maxPriorityFeePerGas;
+
+    // Enforce the configured max gas price cap
+    if (maxFeePerGas > this.maxGasPrice) {
+      this.logger.warn({
+        computed: maxFeePerGas.toString(),
+        cap: this.maxGasPrice.toString(),
+      }, 'Gas price exceeds cap, clamping');
+      maxFeePerGas = this.maxGasPrice;
+    }
 
     const estimatedCost = gasLimit * maxFeePerGas;
 

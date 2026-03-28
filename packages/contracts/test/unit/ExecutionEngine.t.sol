@@ -25,7 +25,6 @@ contract ExecutionEngineTest is TestSetup {
         uint256 wfId = _createSimpleWorkflow();
 
         // Fund the reward manager so it can pay the executor
-        rewardManager.deposit{value: DEFAULT_REWARD}(wfId);
 
         vm.prank(executor);
         engine.executeStep(wfId);
@@ -37,7 +36,6 @@ contract ExecutionEngineTest is TestSetup {
     function test_executeStep_paysRewardToExecutor() public {
         uint256 wfId = _createSimpleWorkflow();
 
-        rewardManager.deposit{value: DEFAULT_REWARD}(wfId);
 
         uint256 executorBalanceBefore = executor.balance;
 
@@ -50,7 +48,6 @@ contract ExecutionEngineTest is TestSetup {
     function test_executeStep_advancesWorkflow() public {
         uint256 wfId = _createMultiStepWorkflow(2, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: DEFAULT_REWARD * 2}(wfId);
 
         vm.prank(executor);
         engine.executeStep(wfId);
@@ -63,7 +60,6 @@ contract ExecutionEngineTest is TestSetup {
     function test_executeStep_completesWorkflowOnLastStep() public {
         uint256 wfId = _createSimpleWorkflow();
 
-        rewardManager.deposit{value: DEFAULT_REWARD}(wfId);
 
         vm.prank(executor);
         engine.executeStep(wfId);
@@ -95,7 +91,6 @@ contract ExecutionEngineTest is TestSetup {
     function test_executeStep_emitsEvent() public {
         uint256 wfId = _createSimpleWorkflow();
 
-        rewardManager.deposit{value: DEFAULT_REWARD}(wfId);
 
         // We check topic1 (workflowId) and topic2 (stepIndex) and topic3 (executor)
         vm.expectEmit(true, true, true, false);
@@ -116,7 +111,6 @@ contract ExecutionEngineTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: DEFAULT_REWARD}(steps, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: DEFAULT_REWARD}(wfId);
 
         vm.prank(executor);
         engine.executeStep(wfId);
@@ -134,7 +128,6 @@ contract ExecutionEngineTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: DEFAULT_REWARD * 2}(steps, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: DEFAULT_REWARD * 2}(wfId);
 
         // Execute step 0
         vm.prank(executor);
@@ -154,7 +147,6 @@ contract ExecutionEngineTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: DEFAULT_REWARD * 2}(steps, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: DEFAULT_REWARD * 2}(wfId);
 
         // Execute step 0
         vm.prank(executor);
@@ -190,7 +182,6 @@ contract ExecutionEngineTest is TestSetup {
     function test_isStepReady_returnsFalseForCompletedWorkflow() public {
         uint256 wfId = _createSimpleWorkflow();
 
-        rewardManager.deposit{value: DEFAULT_REWARD}(wfId);
 
         vm.prank(executor);
         engine.executeStep(wfId);
@@ -206,7 +197,6 @@ contract ExecutionEngineTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: DEFAULT_REWARD * 2}(steps, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: DEFAULT_REWARD * 2}(wfId);
 
         // Execute step 0
         vm.prank(executor);
@@ -224,7 +214,6 @@ contract ExecutionEngineTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: DEFAULT_REWARD * 2}(steps, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: DEFAULT_REWARD * 2}(wfId);
 
         vm.prank(executor);
         engine.executeStep(wfId);
@@ -250,7 +239,6 @@ contract ExecutionEngineTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: DEFAULT_REWARD}(steps, DEFAULT_REWARD);
 
-        rewardManager.deposit{value: DEFAULT_REWARD}(wfId);
 
         vm.prank(executor);
         engine.executeStep(wfId);

@@ -8,9 +8,9 @@ dataSources:
     name: WorkflowRegistry
     network: base-sepolia
     source:
-      address: "0x0000000000000000000000000000000000000000"
+      address: "0xc17F81db41a12a396e54DA9694B323148c945117"
       abi: WorkflowRegistry
-      startBlock: 0
+      startBlock: 38986980
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,9 +38,9 @@ dataSources:
     name: ExecutionEngine
     network: base-sepolia
     source:
-      address: "0x0000000000000000000000000000000000000000"
+      address: "0xE8E045ad8332700E811f3424C0E902057BBd0dAE"
       abi: ExecutionEngine
-      startBlock: 0
+      startBlock: 38986980
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -61,9 +61,9 @@ dataSources:
     name: RewardManager
     network: base-sepolia
     source:
-      address: "0x0000000000000000000000000000000000000000"
+      address: "0xe28489d7687b67EE99feBC81cd39331E29db4Ef2"
       abi: RewardManager
-      startBlock: 0
+      startBlock: 38986980
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

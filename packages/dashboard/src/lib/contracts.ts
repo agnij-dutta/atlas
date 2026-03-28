@@ -1,9 +1,9 @@
 import { type Address } from 'viem';
 
 export const CONTRACTS = {
-  workflowRegistry: (process.env.NEXT_PUBLIC_REGISTRY_ADDRESS || '0x0000000000000000000000000000000000000000') as Address,
-  executionEngine: (process.env.NEXT_PUBLIC_ENGINE_ADDRESS || '0x0000000000000000000000000000000000000000') as Address,
-  rewardManager: (process.env.NEXT_PUBLIC_REWARD_ADDRESS || '0x0000000000000000000000000000000000000000') as Address,
+  workflowRegistry: (process.env.NEXT_PUBLIC_REGISTRY_ADDRESS || '0xc17F81db41a12a396e54DA9694B323148c945117') as Address,
+  executionEngine: (process.env.NEXT_PUBLIC_ENGINE_ADDRESS || '0xE8E045ad8332700E811f3424C0E902057BBd0dAE') as Address,
+  rewardManager: (process.env.NEXT_PUBLIC_REWARD_ADDRESS || '0xe28489d7687b67EE99feBC81cd39331E29db4Ef2') as Address,
 };
 
 export const WORKFLOW_REGISTRY_ABI = [

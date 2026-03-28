@@ -31,8 +31,12 @@ export class WorkflowScanner {
               rewardPerStep: wf.rewardPerStep,
             });
           }
-        } catch {
-          // Workflow may not exist or be in invalid state
+        } catch (err: any) {
+          // Only suppress "workflow not found" type errors, log real failures
+          const msg = err?.message || '';
+          if (!msg.includes('revert') && !msg.includes('out of range')) {
+            this.logger.warn({ workflowId: i.toString(), err: msg }, 'Unexpected error checking workflow');
+          }
         }
       }
     } catch (err) {

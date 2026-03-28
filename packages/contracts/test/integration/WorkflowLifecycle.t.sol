@@ -54,9 +54,6 @@ contract WorkflowLifecycleTest is TestSetup {
         vm.prank(alice);
         uint256 wfId = registry.createWorkflow{value: totalReward}(steps, rewardPerStep);
 
-        // Deposit rewards into RewardManager for the engine to pay out
-        rewardManager.deposit{value: totalReward}(wfId);
-
         // Verify initial state
         DataTypes.Workflow memory wf = registry.getWorkflow(wfId);
         assertEq(uint8(wf.status), uint8(DataTypes.WorkflowStatus.ACTIVE));
@@ -110,14 +107,12 @@ contract WorkflowLifecycleTest is TestSetup {
         // isStepReady should be false for completed workflow
         assertFalse(engine.isStepReady(wfId));
 
-        // Reward manager balance for this workflow should be zero
-        assertEq(rewardManager.getBalance(wfId), 0);
+        // Registry reward balance for this workflow should be zero
+        assertEq(registry.getWorkflow(wfId).rewardBalance, 0);
     }
 
     function test_lifecycle_pauseAndResumeMidWorkflow() public {
         uint256 wfId = _createMultiStepWorkflow(3, DEFAULT_REWARD);
-
-        rewardManager.deposit{value: DEFAULT_REWARD * 3}(wfId);
 
         // Execute step 0
         vm.prank(executor);
@@ -147,8 +142,6 @@ contract WorkflowLifecycleTest is TestSetup {
 
     function test_lifecycle_cancelMidWorkflow() public {
         uint256 wfId = _createMultiStepWorkflow(3, DEFAULT_REWARD);
-
-        rewardManager.deposit{value: DEFAULT_REWARD * 3}(wfId);
 
         // Execute step 0
         vm.prank(executor);

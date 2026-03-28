@@ -1,8 +1,8 @@
 export const ATLAS_CONTRACTS = {
   baseSepolia: {
-    workflowRegistry: '0x0000000000000000000000000000000000000000' as `0x${string}`,
-    executionEngine: '0x0000000000000000000000000000000000000000' as `0x${string}`,
-    rewardManager: '0x0000000000000000000000000000000000000000' as `0x${string}`,
+    workflowRegistry: '0xc17F81db41a12a396e54DA9694B323148c945117' as `0x${string}`,
+    executionEngine: '0xE8E045ad8332700E811f3424C0E902057BBd0dAE' as `0x${string}`,
+    rewardManager: '0xe28489d7687b67EE99feBC81cd39331E29db4Ef2' as `0x${string}`,
   },
 } as const;
 
